@@ -23,7 +23,7 @@ public class WordCounter {
         JavaRDD<String> inputFile = sparkContext.textFile(fileName);
 
         JavaRDD<String> wordsFromFile = inputFile
-                .flatMap(content -> Arrays.asList(content.split(" ")).iterator());
+                .flatMap(content -> Arrays.asList(content.split("\\pP")).iterator());
 
         JavaPairRDD countData = wordsFromFile.mapToPair(t -> new Tuple2(t, 1)).reduceByKey((x, y) -> (int) x + (int) y);
 
